@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
 	<title>login</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
 	</style>
 	<h2><%= title %></h2>
 	<section class="login">
-		<form class="form-horizontal" action="/login" method="post">
+		<form class="form-horizontal" onsubmit="return false">
 		  <div class="form-group">
 		    <label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
 		    <div class="col-sm-10">
@@ -29,11 +30,47 @@
 		  
 		  <div class="form-group">
 		    <div class="col-sm-offset-2 col-sm-10">
-		      <button type="submit" class="btn btn-success">登录</button>
+		      <button type="submit" class="btn btn-success" id="submit">登录</button>
 		      <a href="/register" class="btn btn-default">还没有注册，去注册</a>
 		    </div>
 		  </div>
 		</form>
 	</section>
+	<script>
+		$('#submit').click(function(){
+			var email = $('input[name=email]').val();
+			var password = $('input[name=password]').val();
+			if(email=="" || password==""){
+				console.log('邮箱和密码必填')
+				alert('邮箱和密码必填')
+				return;
+			}
+			$.ajax({
+				url:'/login',
+				type:'POST',
+				data: {
+					email:email,
+					password:password
+				},
+				success:function (data){
+					console.log(data)
+					if(data.status==1){
+						alert(data.text)
+						location.href = '/home'
+					}else if (data.status==-1) {
+						alert(data.text)
+					}
+					else {
+						alert(data.text)
+					}
+					
+					
+				},
+				error:function(){
+					console.log(3333)
+				}
+			})
+		})
+	</script>
 </body>
 </html>
