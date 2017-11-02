@@ -45,9 +45,9 @@ app.use(function(req,res,next){
 	// if(req.session.islogin==true && url != "/home"){
 	// 	res.redirect("/home");
 	// }else {
-		console.log(req.cookies.name)
+		// console.log(req.cookies.name)
 		if(!req.cookies.name && url != "/login" && url != "/register"){
-			console.log('3333')
+			// console.log('3333')
 			return res.redirect("/login");
 		}else {
 			next()
@@ -112,7 +112,7 @@ app.route('/register')
    		var username = req.body.username;
    		var password = req.body.password;
    		onmysql(email,function(data){
-   			console.log('cha')
+   			// console.log('cha')
    			if(data.status==200){
    				addMysql(email,username,password,function(data1){
 		   			res.json(data1)
@@ -157,7 +157,7 @@ function addMysql(email,name,password,callback){
 	        		text:'添加新用户失败'
 	        	})
 	        }else {
-	        	// console.log('成功新添加用户'+name)
+	        	 console.log('成功新添加用户'+name)
 	        	callback({
 	        		status:1,
 	        		text:'新用户成功'
@@ -192,7 +192,7 @@ function onmysql(email,callback){
 function queryMysql(email,password,callback){
 	var querymysql = 'select * from test1 where email="'+email+'";'
 	pool.getConnection(function(err,conn){
-		console.log('4444444')
+		// console.log('4444444')
 		// if (err) console.log("POOL ==> " + err);
 	    conn.query(querymysql,function(err,rows){
 	        if (err){
@@ -202,7 +202,7 @@ function queryMysql(email,password,callback){
 	        	if (rows.length===0) {
 	        		callback('没有该用户')
 	        	}else {
-	        		console.log(rows);
+	        		// console.log(rows);
 		        	if(rows[0].password===password){
 
 		        		callback('登陆成功',rows[0].name)

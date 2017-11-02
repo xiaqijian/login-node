@@ -11,10 +11,10 @@
 	
 	<style>
 		.login {
-			width: 600px;
+			width: 370px;
 		}
 	</style>
-	<h2>register</h2>
+	<h2>注册</h2>
 	<section class="login">
 		<form class="form-horizontal" onsubmit="return false">
 		  <div class="form-group">
@@ -45,10 +45,10 @@
 		    </div>
 		  </div>
 		  <div class="form-group">
-		    <div class="col-sm-offset-2 col-sm-10">
-		      <button  class="btn btn-default" id="submit">注册</button>
-		      <a href="/login" class="btn btn-success">我已经注册，去登录</a>
+		    <div class="col-sm-offset-2 col-sm-10" style="margin-bottom: 12px;">
+		      <button  class="btn btn-success" id="submit" style="width: 100%;">注册</button>
 		    </div>
+		    <a href="/login" class="btn btn-info" style="display: block;float: right;">登录</a>
 		  </div>
 		</form>
 	</section>
@@ -68,7 +68,7 @@
 				type:'POST',
 				data:{
 					email:email,
-					name:username,
+					username:username,
 					password:password
 				},
 				success:function(data){
