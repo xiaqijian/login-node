@@ -1,0 +1,2 @@
+# login-node
+node --login
